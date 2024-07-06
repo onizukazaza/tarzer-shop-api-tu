@@ -74,9 +74,9 @@ func ConfigGetting() *Config {
 			panic(err)
 		}
 
-		validating := validator.New()
+		validating := validator.New() 
 
-		if err := validating.Struct(configInstance); err != nil {
+		if err := validating.Struct(configInstance); err != nil { // & viper base on
 			panic(err)
 		}
 	})
