@@ -1,9 +1,9 @@
 server:
-port: 8000
+port: 8080
 allowOrigins:
 - "*"
 bodyLimit: "10M"  # mib
-timeout: 30  # Seconds
+timeout: 30  # S
 
 oauth2:
 playerRedirectUrl: "http://localhost:8080/v1/oauth2/google/player/login/callback"
@@ -16,15 +16,14 @@ tokenUrl: "https://oauth2.googleapis.com/token"
 deviceAuthUrl: "https://oauth2.googleapis.com/device/code"
 
 scopes: 
- - "https://www.googleapis.com/auth/userinfo.email"
+    - "https://www.googleapis.com/auth/userinfo.email"
     - "https://www.googleapis.com/auth/userinfo.profile"
 userInfoUrl: "https://www.googleapis.com/oauth2/v2/userinfo"
-
 revokeUrl: "https://accounts.google.com/o/oauth2/revoke"
 
 state:
-secret: "xxxx"
-expiresAT: 120 #second
+secret: "xxxxx"
+expiresAT: 120
 issuer: "tarzershop"
 
 database:

@@ -4,8 +4,7 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
 )
 
@@ -25,11 +24,11 @@ type (
 	OAuth2 struct {
 		PlayerRedirectUrl string   `mapstructure:"playerRedirectUrl" validate:"required"`
 		AdminRedirectUrl  string   `mapstructure:"adminRedirectUrl" validate:"required"`
-		ClientID          string   `mapstructure:"clientID" validate:"required"`
+		ClientID          string   `mapstructure:"clientId" validate:"required"`
 		ClientSecret      string   `mapstructure:"clientSecret" validate:"required"`
 		Endpoints         endpoint `mapstructure:"endpoints" validate:"required"`
 		Scopes            []string `mapstructure:"scopes" validate:"required"`
-		UrlInfoUrl        string   `mapstructure:"uelInfoUrl" validate:"required"`
+		UserInfoUrl        string   `mapstructure:"userInfoUrl" validate:"required"`
 		RevokeUrl         string   `mapstructure:"revokeUrl" validate:"required"`
 	}
 
@@ -48,8 +47,8 @@ type (
 		Port     int    `mapstructure:"port" validate:"required"`
 		User     string `mapstructure:"user" validate:"required"`
 		Password string `mapstructure:"password" validate:"required"`
-		Dbname   string `mapstructure:"dbname" validate:"required"`
-		Sslmode  string `mapstructure:"sslmode" validate:"required"`
+		DBName   string `mapstructure:"dbname" validate:"required"`
+		SSLMode  string `mapstructure:"sslmode" validate:"required"`
 		Schema   string `mapstructure:"schema" validate:"required"`
 	}
 )
