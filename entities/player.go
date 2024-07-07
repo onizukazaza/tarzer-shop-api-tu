@@ -3,7 +3,7 @@ package entities
 import "time"
 
 type Player struct {
-	ID          string      `gorm:"primaryKey;type;varchar(64);"`
+	ID          string      `gorm:"primaryKey;type:varchar(64);"`
 	Email       string      `gorm:"type:varchar(128);unique;not null;"`
 	Name        string      `gorm:"type:varchar(128);not null;"`
 	Avatar      string      `gorm:"type:varchar(128);not null;default:'';"`
