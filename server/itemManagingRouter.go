@@ -15,10 +15,10 @@ func (s *echoServer) initItemManagingRouter() {
 	itemManagingService := _itemManagingService.NewItemManagingServiceImpl(
 		itemManagingRepository,
 		itemShopRepository,
-
 	)
 	itemManagingController := _itemManagingController.NewItemManagingControllerImpl(itemManagingService)
 
 	router.POST("", itemManagingController.Creating)
 	router.PATCH("/:itemID", itemManagingController.Editing)
+	router.DELETE("/:itemID", itemManagingController.Archiving)
 }

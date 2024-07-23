@@ -1,7 +1,6 @@
 package main
 
 import (
-	
 	"github.com/onizukazaza/tarzer-shop-api-tu/config"
 	"github.com/onizukazaza/tarzer-shop-api-tu/databases"
 	"github.com/onizukazaza/tarzer-shop-api-tu/entities"
@@ -12,8 +11,8 @@ func main() {
 	conf := config.ConfigGetting()
 	db := databases.NewPostgresDatabase(conf.Database)
 
-	// fmt.Println(db.ConnectionGetting())
-	tx := db.ConnectionGetting().Begin()
+	// fmt.Println(db.Connect())
+	tx := db.Connect().Begin()
 
 	playerMigration(tx)
 	adminMigration(tx)

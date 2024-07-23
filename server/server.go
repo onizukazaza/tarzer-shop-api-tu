@@ -8,17 +8,19 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 	"github.com/onizukazaza/tarzer-shop-api-tu/config"
+	"github.com/onizukazaza/tarzer-shop-api-tu/databases"
 	"golang.org/x/net/context"
-	"gorm.io/gorm"
+	
 )
 
 type echoServer struct {
 	app  *echo.Echo
-	db   *gorm.DB
+	db   databases.Database
 	conf *config.Config
 }
 
@@ -27,7 +29,7 @@ var (
 	server *echoServer
 )
 
-func NewEchoServer(conf *config.Config, db *gorm.DB) *echoServer {
+func NewEchoServer(conf *config.Config, db databases.Database) *echoServer {
 	echoApp := echo.New()
 	echoApp.Logger.SetLevel(log.DEBUG)
 
