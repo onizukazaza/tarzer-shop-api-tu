@@ -6,7 +6,7 @@ import (
     _itemManagingService "github.com/onizukazaza/tarzer-shop-api-tu/pkg/itemManaging/service"
 	_itemShopRepository "github.com/onizukazaza/tarzer-shop-api-tu/pkg/itemShop/repository"
 )
-func (s *echoServer) initItemManagingRouter() {
+func (s *echoServer) initItemManagingRouter(m *authorizingMiddleware) {
 	router := s.app.Group("/v1/item-managing")
 
 	itemShopRepository := _itemShopRepository.NewItemShopRepositoryImpl(s.db, s.app.Logger)
@@ -18,7 +18,7 @@ func (s *echoServer) initItemManagingRouter() {
 	)
 	itemManagingController := _itemManagingController.NewItemManagingControllerImpl(itemManagingService)
 
-	router.POST("", itemManagingController.Creating)
-	router.PATCH("/:itemID", itemManagingController.Editing)
-	router.DELETE("/:itemID", itemManagingController.Archiving)
+	router.POST("", itemManagingController.Creating , m.AdminAuthorizing)
+	router.PATCH("/:itemID", itemManagingController.Editing , m.AdminAuthorizing)
+	router.DELETE("/:itemID", itemManagingController.Archiving , m.AdminAuthorizing)
 }

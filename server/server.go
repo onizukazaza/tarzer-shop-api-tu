@@ -15,6 +15,11 @@ import (
 	"github.com/onizukazaza/tarzer-shop-api-tu/config"
 	"github.com/onizukazaza/tarzer-shop-api-tu/databases"
 	"golang.org/x/net/context"
+	_oauth2Service "github.com/onizukazaza/tarzer-shop-api-tu/pkg/oauth2/service"
+	_oauth2Controller "github.com/onizukazaza/tarzer-shop-api-tu/pkg/oauth2/controller"
+	_playerRepository "github.com/onizukazaza/tarzer-shop-api-tu/pkg/player/repository"
+	_adminRepository "github.com/onizukazaza/tarzer-shop-api-tu/pkg/admin/repository"
+
 	
 )
 
@@ -54,9 +59,12 @@ func (s *echoServer) Start() {
 	s.app.Use(bodyLimitMiddleware)
 	s.app.Use(timeOutMiddleware)
 
+	authorizingMiddleware := s.getAuthorizingMiddleware()
+
 	s.app.GET("/v1/health", s.healthCheck)
 
-	s.initItemManagingRouter()
+    s.initOAuth2Router()
+	s.initItemManagingRouter(authorizingMiddleware) //api route set midleware 
 	s.initItemShopRouter()
 	
 	quitCh := make(chan os.Signal, 1) //stop server fully
@@ -112,3 +120,22 @@ return middleware.CORSWithConfig(middleware.CORSConfig{
 func getBodyLimitMiddleware(bodyLimit string)echo.MiddlewareFunc {
 	return middleware.BodyLimit(bodyLimit)
 }
+
+
+func (s *echoServer) getAuthorizingMiddleware() *authorizingMiddleware  {
+
+	playerRepository := _playerRepository.NewPlayerRepositoryImpl(s.db, s.app.Logger)
+	adminRepository := _adminRepository.NewAdminRepositoryImpl(s.db, s.app.Logger)
+	oauth2Service := _oauth2Service.NewGoogleOAuth2Service(playerRepository, adminRepository)
+	oauth2Controller := _oauth2Controller.NewGoogleOAuth2Controller(
+		oauth2Service, 
+		s.conf.OAuth2, 
+		s.app.Logger,
+	)
+
+	return &authorizingMiddleware{
+		oauth2Controller: oauth2Controller, 
+		oauth2Conf: s.conf.OAuth2, 
+		logger:  s.app.Logger,
+	}
+ }

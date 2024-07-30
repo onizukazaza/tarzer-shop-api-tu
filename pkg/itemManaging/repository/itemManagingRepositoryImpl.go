@@ -43,16 +43,11 @@ func (r *itemManagingRepositoryImpl) Editing(itemID uint64, itemEditingReq *_ite
 }
 
 func (r *itemManagingRepositoryImpl) Archiving(itemID uint64) error {
-	// Updating the 'is_archive' column to 'true' for the specified 'itemID'
 	if err := r.db.Connect().Table("items").
 		Where("id = ?", itemID).
 		Update("is_archive", true).Error; err != nil {
-		// Logging the error if the update fails
 		r.logger.Errorf("Archiving item failed: %s", err.Error())
-		// Returning a custom error
 		return &_itemManagingExceptions.ItemArchiving{ItemID: itemID}
 	}
-
-	// Returning nil if the update is successful
 	return nil
 }
