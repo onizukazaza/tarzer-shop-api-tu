@@ -10,7 +10,7 @@
 <div style="border-left: 4px solid blue; padding-left: 10px; margin-bottom: 20px;">
   <h3>Archive Notice</h3>
   <p style="font-size: 18px; line-height: 1.6;">
-  This course project is named “Tarzer Shop API.”  So this project is going to act like CRUD project + OAuth2.
+  This project is named “Tarzer Shop API.”  So this project is going to act like CRUD project + OAuth2.
   </p>
 <div style="border-left: 4px solid blue; padding-left: 10px; margin-top: 20px;">
   <h2>Configuration</h2>
