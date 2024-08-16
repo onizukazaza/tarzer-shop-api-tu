@@ -12,3 +12,36 @@
   <p style="font-size: 18px; line-height: 1.6;">
   This course project is named “Tarzer Shop API.”  So this project is going to act like CRUD project + OAuth2.
   </p>
+<div style="border-left: 4px solid blue; padding-left: 10px; margin-top: 20px;">
+  <h2>Configuration</h2>
+  <ul>
+    <li>Item Shop</li>
+     <ul>
+            <li>Listing</li>
+            <li>Selling</li>
+            <li>Buying</li>
+        </ul>
+    <li>Item Managing
+        <ul>
+            <li>Creating</li>
+            <li>Editing</li>
+          <li>Archiving</li>
+        </ul>
+    </li>
+    <li>Inventory</li>
+     <ul>
+            <li>Listing</li>
+        </ul>
+    <li>OAuth2</li>
+     <ul>
+            <li>Admin Login</li>
+            <li>Player Login</li>
+            <li>Login</li>
+            <li>Middleware</li>
+        <ul>
+                    <li>Admin Authorize</li>
+                    <li>Player Authorize</li>
+                </ul>
+        </ul>
+  </ul>
+</div>
